@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
+import SceneTree from './utilities/SceneTree';
+import SceneTreeView from './components/SceneTreeView';
 import TableView from './components/TableView';
 
 function App() {
+  const [sceneTree]  = useState(new SceneTree());
+
+  sceneTree.addLayer({
+    name: 'Base Layer',
+    backgroundImage: '/img/texture.jpg',
+    width: 3,
+    height: 2
+  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -12,11 +23,11 @@ function App() {
 
       <main className="view-set">
         <div className="view-pane table-view">
-          <TableView />
+          <TableView scene_tree={sceneTree} />
         </div>
 
         <div className="view-pane tool-bar">
-
+          <SceneTreeView scene_tree={sceneTree} />
         </div>
       </main>
     </div>
